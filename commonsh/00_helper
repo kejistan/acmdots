@@ -40,6 +40,35 @@ concat_manpath ()
 	fi
 }
 
+concat_lib ()
+{
+	case `uname -s` in
+		Darwin)
+			LD_LIBRARY_PATH_VAR="DYLD_LIBRARY_PATH"
+		;;
+		Linux|FreeBSD|OpenBSD|SunOS)
+			LD_LIBRARY_PATH_VAR="LD_LIBRARY_PATH"
+		;;
+	esac
+
+	if [ -z "$1" ] ; then
+		echo "Please give me a value to concatinate to the $LD_LIBRARY_PATH_VAR!"
+		return
+	fi
+
+	addition=$1
+
+	if [ -d "${addition}" ] ; then
+		if [ -z "${!LD_LIBRARY_PATH_VAR}" ] ; then
+			eval "${LD_LIBRARY_PATH_VAR}=${addition}"
+		else
+			eval "${LD_LIBRARY_PATH_VAR}=${addition}:${!LD_LIBRARY_PATH_VAR}"
+		fi
+
+		export $LD_LIBRARY_PATH_VAR
+	fi
+}
+
 # we don't have a MANPATH? we can find one.
 if [ -z "${MANPATH}" ] ; then
 	case `uname -s` in
