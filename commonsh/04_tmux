@@ -1,7 +1,6 @@
 #!/bin/sh
 
 # Start tmux if available and if we aren't in a tmux/screen session
-if [ "${TERM}" != "screen" ] && command -v tmux; then
-	echo "tmux"
+if [ "${TERM}" != "screen" ] && command -v tmux >/dev/null 2>&1; then
 	tmux
 fi
