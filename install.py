@@ -61,6 +61,8 @@ links = {
 	'git-untrack-ignored': 'bin/git-untracked-ignored',
 
 	'gdbinit': '.gdbinit',
+
+	'tmux.conf': '.tmux.conf',
 }
 
 scriptdir = os.path.dirname(os.path.realpath(__file__))
