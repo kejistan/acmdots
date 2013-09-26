@@ -1,0 +1,4 @@
+[alias]
+show = log --rev $1 --patch
+
+%include ~/.hgprivate

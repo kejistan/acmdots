@@ -171,19 +171,35 @@ def install_all(force=False):
 		print 'Could not compile answerback.'
 
 	# Create private git config and add it to links
-	if not os.path.exists(os.path.join(scriptdir, 'gitprivate')):
-		name = raw_input('Full name for Git config (enter to skip): ')
-		email = raw_input('Email address for Git config (enter to skip): ')
+	gitprivate_exists = os.path.exists(os.path.join(scriptdir, 'gitprivate'))
+	hgprivate_exists  = os.path.exists(os.path.join(scriptdir, 'hgprivate'))
+	if not (gitprivate_exists and hgprivate_exists):
+		name = raw_input('Full name for Git/Hg config (enter to skip): ')
+		email = raw_input('Email address for Git/Hg config (enter to skip): ')
 		if name or email:
-			with open(os.path.join(scriptdir, 'gitprivate'), 'w') as config:
-				config.write('[user]\n')
-				if name:
-					config.write('\tname = ' + name + '\n')
-				if email:
-					config.write('\temail = ' + email + '\n')
-			links['gitprivate'] = '.gitprivate'
+			if not gitprivate_exists:
+				with open(os.path.join(scriptdir, 'gitprivate'), 'w') as config:
+					config.write('# This file is for private user information that should not be committed to the repository.\n')
+					config.write('[user]\n')
+					if name:
+						config.write('\tname = ' + name + '\n')
+					if email:
+						config.write('\temail = ' + email + '\n')
+				links['gitprivate'] = '.gitprivate'
+			if not hgprivate_exists:
+				with open(os.path.join(scriptdir, 'hgprivate'), 'w') as config:
+					config.write('# This file is for private user information that should not be committed to the repository.\n')
+					config.write('[ui]\n')
+					if name and email:
+						config.write('\tusername = ' + name + ' <' + email + '>\n')
+					elif name:
+						config.write('\tusername = ' + name + '\n')
+					elif email:
+						config.write('\tusername = ' + email + '\n')
+				links['hgprivate'] = '.hgprivate'
 	else:
 		links['gitprivate'] = '.gitprivate'
+		links['hgprivate'] = '.hgprivate'
 
 	i = 0; # Keep track of how many links we added
 	for file in links:
