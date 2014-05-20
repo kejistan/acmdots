@@ -134,8 +134,8 @@ def install(file, force=False):
 	# If needed, create the directory this file resides in
 	if not os.path.exists(path):
 		os.makedirs(path)
-
-	if os.path.exists(dest):
+	# unlike exists, lexists will return true for broken symlinks 
+	if os.path.lexists(dest):
 		if force:
 			# Remove the destination if it exists
 			if os.path.isdir(dest) and not os.path.islink(dest):

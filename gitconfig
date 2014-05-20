@@ -9,6 +9,8 @@
 	up     = pull --rebase
 	update = pull --rebase
 	svnup     = !git stash && git svn rebase && git stash apply
+	svnpull     = !git stash && git svn rebase && git stash apply
+	svnpush     = !git stash && git svn dcommit && git stash apply
 	svnupdate = !git stash && git svn rebase && git stash apply
 	st   = status
 	stat = status

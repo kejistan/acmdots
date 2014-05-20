@@ -62,9 +62,11 @@
 (desire 'generic-x "generic-x.el")
 
 ;; Turn on line numbering (hopefully with linum-mode)
-(desire 'linum "linum.el"
-		'(global-linum-mode 1)
-		'(global-line-number-mode 1))
+(if (boundp 'global-linum-mode) 
+	'(global-linum-mode 1)
+	(desire 'linum "linum.el"
+			'(global-linum-mode 1)
+			'(global-line-number-mode 1)))
 
 ;; Set up the color theme
 (if (fboundp 'load-theme)
