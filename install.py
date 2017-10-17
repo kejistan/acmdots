@@ -63,6 +63,8 @@ links = {
 	'gdbinit': '.gdbinit',
 
 	'tmux.conf': '.tmux.conf',
+
+	'zsh-histdb': '.zsh-histdb',
 }
 
 scriptdir = os.path.dirname(os.path.realpath(__file__))

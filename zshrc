@@ -13,6 +13,15 @@ if [ ${ZSH_VERSION//.} -gt 420 ] ; then
 	zle -N self-insert url-quote-magic
 fi
 
+if [ -d "${HOME}/.zsh-histdb" ] ; then
+	for file in "${HOME}"/.zsh-histdb/*.zsh ; do
+		. "${file}"
+	done
+
+	autoload -Uz add-zsh-hook
+	add-zsh-hook precmd  histdb-update-outcome
+fi
+
 autoload -U edit-command-line
 zle -N edit-command-line
 

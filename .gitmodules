@@ -1,0 +1,3 @@
+[submodule "zsh-histdb"]
+	path = zsh-histdb
+	url = https://github.com/kejistan/zsh-histdb.git
