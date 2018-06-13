@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if which brew 2>&1 >/dev/null; then
+	NVM_PREFIX=$(brew --prefix nvm 2>/dev/null)
+	if [ $? -eq 0 ]; then
+		source $(brew --prefix nvm)/nvm.sh
+	fi
+fi
