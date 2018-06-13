@@ -23,6 +23,10 @@ done
 for EDITOR in subl vimx vim elvis vile nvi vi ; do
 	command -v $EDITOR >/dev/null 2>&1 && break
 done
+# wait for exit for editor
+if [ "${EDITOR}" = subl ] ; then
+	EDITOR="subl -w"
+fi
 export EDITOR
 
 # make the history editor the editor we want
